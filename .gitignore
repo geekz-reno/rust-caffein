@@ -1,0 +1,8 @@
+/target/
+*.app/
+*.icns
+*.iconset/
+.DS_Store
+/graphify-out/
+/.graphifyignore
+/.graphify/

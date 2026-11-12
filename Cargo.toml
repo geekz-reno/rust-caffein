@@ -1,0 +1,19 @@
+[package]
+name = "caffeine-rust"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "A lightweight native macOS menu bar utility that keeps your Mac awake"
+license = "MIT"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6.3"
+objc2-foundation = { version = "0.3.2", default-features = false, features = ["std", "NSTimer", "NSDate", "NSUserDefaults", "NSNotification", "NSBundle", "NSString", "NSRunLoop", "NSURL", "NSDictionary", "NSArray", "NSGeometry"] }
+objc2-app-kit = { version = "0.3.2", default-features = false, features = ["std", "objc2-core-foundation", "NSRunningApplication", "NSApplication", "NSStatusBar", "NSStatusItem", "NSStatusBarButton", "NSButton", "NSControl", "NSCell", "NSResponder", "NSMenu", "NSMenuItem", "NSEvent", "NSImage", "NSImageView", "NSWindow", "NSView", "NSTextField", "NSPopUpButton", "NSWorkspace", "NSAlert", "NSAccessibilityProtocols", "NSFont", "NSGraphics"] }
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "s"
+strip = true
+panic = "abort"
