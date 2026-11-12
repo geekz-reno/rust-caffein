@@ -523,16 +523,11 @@ impl Delegate {
     }
 
     fn add_logo(&self, view: &NSView, frame: NSRect) {
-        if let Some(path) = NSBundle::mainBundle().pathForResource_ofType(
-            Some(&NSString::from_str("Logo")),
-            Some(&NSString::from_str("pdf")),
-        ) {
-            if let Some(image) = NSImage::initWithContentsOfFile(NSImage::alloc(), &path) {
-                let logo = NSImageView::initWithFrame(NSImageView::alloc(self.mtm()), frame);
-                logo.setImage(Some(&image));
-                logo.setAccessibilityElement(false);
-                view.addSubview(&logo);
-            }
+        if let Some(image) = NSApplication::sharedApplication(self.mtm()).applicationIconImage() {
+            let logo = NSImageView::initWithFrame(NSImageView::alloc(self.mtm()), frame);
+            logo.setImage(Some(&image));
+            logo.setAccessibilityElement(false);
+            view.addSubview(&logo);
         }
     }
 

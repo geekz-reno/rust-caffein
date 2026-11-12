@@ -46,12 +46,12 @@ cp "$root/resources/active.png" "$root/resources/active@2x.png" \
 cp "$root/resources/Logo.pdf" "$resources/"
 cp -R "$root"/resources/*.lproj "$resources/"
 
-# Keep only the upstream PNG source in version control. Generate the icon here.
+# Keep only the source artwork in version control. Generate the icon from the About logo here.
 for size in 16 32 128 256 512; do
-    sips -z "$size" "$size" "$root/resources/Cup.png" \
+    sips -s format png -z "$size" "$size" "$root/resources/Logo.pdf" \
         --out "$iconset/icon_${size}x${size}.png" >/dev/null
     retina_size=$((size * 2))
-    sips -z "$retina_size" "$retina_size" "$root/resources/Cup.png" \
+    sips -s format png -z "$retina_size" "$retina_size" "$root/resources/Logo.pdf" \
         --out "$iconset/icon_${size}x${size}@2x.png" >/dev/null
 done
 iconutil -c icns "$iconset" -o "$resources/Caffeine.icns"
